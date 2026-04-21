@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 public class Video {
 
     @Id
-    @JsonProperty("id")
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private long id;
 
     @JsonProperty("name")
@@ -43,6 +44,19 @@ public class Video {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "videoId")
     private List<Caption> captions;
+
+    public Video(){
+
+    }
+
+    public Video(String name,String description,String releaseTime){
+        setName(name);
+        setDescription(description);
+        setReleaseTime(releaseTime);
+        setAuthor(null);
+        setCaptions(new ArrayList<>());
+        setComments(new ArrayList<>());
+    }
 
     public long getId() {
         return id;

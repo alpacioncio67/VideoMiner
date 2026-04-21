@@ -24,6 +24,16 @@ public class User {
     @JsonProperty("picture_link")
     private String picture_link;
 
+    public User(){
+
+    }
+
+    public User(String name,String user_link,String picture_link){
+        setName(name);
+        setUser_link(user_link);
+        setPicture_link(picture_link);
+    }
+
     public Long getId() {
         return id;
     }
