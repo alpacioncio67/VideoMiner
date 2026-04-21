@@ -1,27 +1,35 @@
 package aiss.videominer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 /**
  * @author Juan C. Alonso
  */
 @Entity
 @Table(name = "Caption")
-public class Caption {
+public class    Caption {
 
     @Id
-    @JsonProperty("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
     @JsonProperty("language")
+    @Column(name = "language")
     private String language;
 
+    public Caption(){
+
+    }
+
+    public Caption(String name, String language){
+        this.name=name;
+        this.language=language;
+    }
 
     public long getId() {
         return id;

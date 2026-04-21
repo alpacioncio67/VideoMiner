@@ -2,7 +2,7 @@ package aiss.videominer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+
 
 /**
  * @author Juan C. Alonso
@@ -21,6 +21,15 @@ public class Comment {
 
     @JsonProperty("createdOn")
     private String createdOn;
+
+    public Comment(){
+
+    }
+
+    public Comment(String text, String createdOn){
+        this.text=text;
+        this.createdOn=createdOn;
+    }
 
     public long getId() {
         return id;
