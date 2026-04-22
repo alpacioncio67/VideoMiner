@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/channel")
+@RequestMapping("/videominer/channel")
 public class ChannelController {
 
     @Autowired

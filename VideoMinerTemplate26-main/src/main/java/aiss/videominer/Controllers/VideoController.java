@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @Tag(name = "Video",description = "Video management API")
 @RestController
-@RequestMapping("/api/videos")
+@RequestMapping("/videominer/videos")
 public class VideoController {
 
     @Autowired

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Tag(name= "User",description = "User management API")
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/videominer/users")
 public class UserController {
 
     @Autowired

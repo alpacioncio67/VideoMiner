@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/captions")
+@RequestMapping("/videominer/captions")
 public class CaptionController {
 
     @Autowired
