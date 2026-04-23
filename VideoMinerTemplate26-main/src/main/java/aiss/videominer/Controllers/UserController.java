@@ -12,6 +12,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +35,10 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
+    // Funciones auxiliares para filtrado
+
+
+
     // Operaciones
     //GET http://localhost:8080/api/users
     @Operation(
@@ -43,8 +51,33 @@ public class UserController {
             content = {@Content(schema = @Schema(implementation = User.class),mediaType = "application/json")})
     })
     @GetMapping
-    public List<User> findAll(){
-        return userRepository.findAll();
+    public List<User> findAll(@RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "10") int size,
+                              @RequestParam(required = false) String name,
+                              @RequestParam(required = false) String order){
+        Pageable paging;
+
+        // Primero tratamos el parámetro order
+
+        if (order!=null){
+            if(order.startsWith("-"))
+                paging = PageRequest.of(page,size, Sort.by(order.substring(1)).descending());
+            else
+                paging = PageRequest.of(page,size,Sort.by(order).ascending());
+        }
+        else
+            paging = PageRequest.of(page,size);
+
+        Page<User> pageUser;
+
+        if (name==null){
+            pageUser = userRepository.findAll(paging);
+        }
+        else
+            // Este método está definido en nuestro repo por nosotros
+            pageUser = userRepository.findByName(name,paging);
+
+        return pageUser.getContent();
     }
 
     //GET http://localhost:8080/api/users/{id}
