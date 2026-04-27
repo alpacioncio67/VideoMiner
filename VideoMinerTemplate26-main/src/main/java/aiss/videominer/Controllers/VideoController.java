@@ -45,14 +45,13 @@ public class VideoController {
     //GET http://localhost:8080/api/users
     @Operation(
             summary = "Retrieve all videos",
-            description = "List all videos",
-            tags = {"videos","get"}
+            description = "List all videos"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de videos",
                     content = {@Content(schema = @Schema(implementation = Video.class),mediaType = "application/json")})
     })
-    @GetMapping
+    @GetMapping()
     public List<Video> findAll(@RequestParam(defaultValue = "0")int page,
                                @RequestParam(defaultValue = "10")int size,
                                @RequestParam(required = false) String name,
@@ -85,8 +84,7 @@ public class VideoController {
     //GET http://localhost:8080/api/videos/{id}
     @Operation(
             summary = "Retrieve one video",
-            description = "Obtain a video based on an Id",
-            tags = {"videos","get"}
+            description = "Obtain a video based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de un videos",
@@ -108,8 +106,7 @@ public class VideoController {
     //POST http://localhost:8080/api/users
     @Operation(
             summary = "Create a video",
-            description = "POST a video",
-            tags = {"videos","post"}
+            description = "POST a video"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "201",description = "Creación de un Video",
@@ -137,8 +134,7 @@ public class VideoController {
     //PUT http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Update a video",
-            description = "Update a video based on an Id",
-            tags = {"videos","put"}
+            description = "Update a video based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Actualización de un Video",
@@ -168,8 +164,7 @@ public class VideoController {
     //DELETE http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Delete a video",
-            description = "Delete a video based on an Id",
-            tags = {"videos","delete"}
+            description = "Delete a video based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Borrado de un video",

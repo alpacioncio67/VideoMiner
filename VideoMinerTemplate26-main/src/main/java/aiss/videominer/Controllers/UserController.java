@@ -43,8 +43,7 @@ public class UserController {
     //GET http://localhost:8080/api/users
     @Operation(
             summary = "Retrieve all users",
-            description = "List all users",
-            tags = {"users","get"}
+            description = "List all users"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de usuarios",
@@ -83,8 +82,7 @@ public class UserController {
     //GET http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Retrieve one user",
-            description = "Find one user based on an Id",
-            tags = {"users","get"}
+            description = "Find one user based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de un usuario",
@@ -93,7 +91,7 @@ public class UserController {
                     content = {@Content(schema = @Schema())})
     })
     @GetMapping("/{id}")
-        public User findOneById(@Parameter(description = "id del usuario a buscar") @PathVariable long id) throws UserNotFoundException {
+        public User findOneById(@Parameter(description = "id del usuario a buscar") @PathVariable String id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isEmpty()){
@@ -106,8 +104,7 @@ public class UserController {
     //POST http://localhost:8080/api/users
     @Operation(
             summary = "Create a user",
-            description = "Post a user",
-            tags = {"users","post"}
+            description = "Post a user"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "201",description = "Creación de un usuario",
@@ -126,8 +123,7 @@ public class UserController {
     //PUT http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Update a user",
-            description = "Update a used based on an Id",
-            tags = {"users","put"}
+            description = "Update a used based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Actualización de un usuario",
@@ -140,7 +136,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @PutMapping("/{id}")
     public void update(@Parameter(description = "Cuerpo del usuario a actualizar") @Valid @RequestBody User updatedUser,
-                       @Parameter(description = "id del usuario a actualizar") @PathVariable long id) throws
+                       @Parameter(description = "id del usuario a actualizar") @PathVariable String id) throws
             UserNotFoundException{
         Optional<User> userData = userRepository.findById(id);
 
@@ -159,8 +155,7 @@ public class UserController {
     //DELETE http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Delete a user",
-            description = "Delete a user based on an Id",
-            tags = {"users","delete"}
+            description = "Delete a user based on an Id"
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Borrado de un usuario",
@@ -172,7 +167,7 @@ public class UserController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void delete(@Parameter(description = "id del usuario a borrar") @PathVariable long id){
+    public void delete(@Parameter(description = "id del usuario a borrar") @PathVariable String id){
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
         }
