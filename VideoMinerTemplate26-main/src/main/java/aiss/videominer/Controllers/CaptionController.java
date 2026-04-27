@@ -1,10 +1,12 @@
 package aiss.videominer.Controllers;
 
 import aiss.videominer.Repositories.CaptionRepository;
-import aiss.videominer.Repositories.UserRepository;
+import aiss.videominer.Repositories.VideoRepository;
 import aiss.videominer.exception.CaptionNotFoundException;
+import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Caption;
 import aiss.videominer.model.User;
+import aiss.videominer.model.Video;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,12 +27,10 @@ import java.util.Optional;
 public class CaptionController {
 
     @Autowired
-    CaptionRepository repository;
+    CaptionRepository captionRepository;
 
     @Autowired
-    public CaptionController(CaptionRepository captionRepository){
-        this.repository = captionRepository;
-    }
+    VideoRepository videoRepository;
 
     @Operation(
             summary = "Retrieve all captions",
@@ -40,16 +40,17 @@ public class CaptionController {
             @ApiResponse(responseCode = "200",description = "Listado de captions",
                     content = {@Content(schema = @Schema(implementation = User.class),mediaType = "application/json")})
     })
+
     //GET http://localhost:8080/api/captions
     @GetMapping
     public List<Caption> findAll(){
-        return repository.findAll();
+        return captionRepository.findAll();
     }
 
     //GET http://localhost:8080/api/captions/{id}
     @GetMapping("/{id}")
-    public Caption findOne(@PathVariable long id) throws CaptionNotFoundException {
-        Optional<Caption> caption = repository.findById(id);
+    public Caption findOne(@PathVariable String id) throws CaptionNotFoundException {
+        Optional<Caption> caption = captionRepository.findById(id);
         if(caption.isEmpty()){
             throw new CaptionNotFoundException();
         }
@@ -58,29 +59,37 @@ public class CaptionController {
 
     //POST http://localhost:8080/api/captions
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Caption create(@Valid @RequestBody Caption caption){
-        Caption _caption = repository.save(new Caption(caption.getId(), caption.getName(),caption.getLanguage()));
-        return _caption;
+    @PostMapping("/videos/{videoId}/captions")
+    public Caption create(@PathVariable String videoId,@Valid @RequestBody Caption caption)
+    throws VideoNotFoundException{
+        Optional<Video> video = videoRepository.findById(videoId);
+        if(video.isEmpty()){
+            throw new VideoNotFoundException();
+        }
+
+        Video persistedVideo = video.get();
+        persistedVideo.getCaptions().add(caption);
+        videoRepository.save(persistedVideo);
+        return caption;
     }
 
     //PUT http://localhost:8080/api/captions/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Caption updatedCaption, @PathVariable long id){
-        Optional<Caption> captionData = repository.findById(id);
+    public void update(@Valid @RequestBody Caption updatedCaption, @PathVariable String id){
+        Optional<Caption> captionData = captionRepository.findById(id);
         Caption _caption = captionData.get();
         _caption.setName(updatedCaption.getName());
         _caption.setLanguage(updatedCaption.getLanguage());
-        repository.save(_caption);
+        captionRepository.save(_caption);
     }
 
     //DELETE http://localhost:8080/api/captions/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
-        if(repository.existsById(id)){
-            repository.deleteById(id);
+    public void delete(@PathVariable String id){
+        if(captionRepository.existsById(id)){
+            captionRepository.deleteById(id);
         }
     }
 }

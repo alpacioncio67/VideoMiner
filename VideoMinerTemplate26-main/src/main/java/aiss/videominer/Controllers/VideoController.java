@@ -5,7 +5,6 @@ import aiss.videominer.Repositories.VideoRepository;
 import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Channel;
-import aiss.videominer.model.User;
 import aiss.videominer.model.Video;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -53,7 +52,7 @@ public class VideoController {
             @ApiResponse(responseCode = "200",description = "Listado de videos",
                     content = {@Content(schema = @Schema(implementation = Video.class),mediaType = "application/json")})
     })
-    @GetMapping
+    @GetMapping("/channels/{channelId}/videos")
     public List<Video> findAll(@RequestParam(defaultValue = "0")int page,
                                @RequestParam(defaultValue = "10")int size,
                                @RequestParam(required = false) String name,
@@ -96,7 +95,7 @@ public class VideoController {
                     content = {@Content(schema = @Schema())})
     })
     @GetMapping("/{id}")
-    public Video findOneById(@Parameter(description = "id del video a buscar") @PathVariable long id) throws VideoNotFoundException {
+    public Video findOneById(@Parameter(description = "id del video a buscar") @PathVariable String id) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(id);
 
         if (video.isEmpty()){
@@ -120,7 +119,8 @@ public class VideoController {
     })
     @ResponseStatus(HttpStatus.CREATED) // 201
     @PostMapping("/channels/{channelId}/videos")
-    public Video create(@PathVariable long channelId ,@Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video)
+    public Video create(@PathVariable String channelId ,
+                        @Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video)
     throws ChannelNotFoundException {
         Optional<Channel> canal = channelRepository.findById(channelId);
 
@@ -128,14 +128,10 @@ public class VideoController {
             throw new ChannelNotFoundException();
         }
 
-        canal.get().getVideos().add(video);
-
-        return videoRepository.save(new Video(video.getId(),video.getName(),
-                video.getDescription(),
-                video.getReleaseTime(),
-                video.getAuthor(),
-                video.getCaptions(),
-                video.getComments()));
+        Channel channel = canal.get();
+        channel.getVideos().add(video);
+        channelRepository.save(channel);
+        return video;
     }
 
     //PUT http://localhost:8080/api/users/{id}
@@ -155,7 +151,7 @@ public class VideoController {
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @PutMapping("/{id}")
     public void update(@Parameter(description = "Cuerpo del usuario a actualizar") @Valid @RequestBody Video updatedVideo,
-                       @Parameter(description = "id del video a actualizar") @PathVariable long id) throws VideoNotFoundException{
+                       @Parameter(description = "id del video a actualizar") @PathVariable String id) throws VideoNotFoundException{
         Optional<Video> videoData = videoRepository.findById(id);
 
         if (videoData.isEmpty()){
@@ -185,7 +181,7 @@ public class VideoController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void delete(@Parameter(description = "id del video a borrar") @PathVariable long id) {
+    public void delete(@Parameter(description = "id del video a borrar") @PathVariable String id) {
         if (videoRepository.existsById(id)){
             videoRepository.deleteById(id);
         }

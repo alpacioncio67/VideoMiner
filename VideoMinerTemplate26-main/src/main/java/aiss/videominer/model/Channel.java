@@ -34,13 +34,12 @@ public class Channel {
     @JsonProperty("videos")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "channelId")
-    @NotNull(message = "Channel videos cannot be null")
     private List<Video> videos;
 
     public Channel() {
     }
 
-    public Channel(String id,String name, String description, String createdTime, List<Video> videos){
+    public Channel(String id,String name, String description, String createdTime){
         this.id=id;
         this.name=name;
         this.description=description;

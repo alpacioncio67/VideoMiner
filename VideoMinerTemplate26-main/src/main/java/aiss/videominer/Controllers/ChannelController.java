@@ -16,18 +16,18 @@ import java.util.Optional;
 public class ChannelController {
 
     @Autowired
-    ChannelRepository repository;
+    ChannelRepository channelRepository;
 
     //GET http://localhost:8080/api/channel
     @GetMapping
     public List<Channel> findAll(){
-        return repository.findAll();
+        return channelRepository.findAll();
     }
 
     //GET http://localhost:8080/api/channel/{id}
     @GetMapping("/{id}")
-    public Channel findOne(@PathVariable long id) throws ChannelNotFoundException {
-        Optional<Channel> channel = repository.findById(id);
+    public Channel findOne(@PathVariable String id) throws ChannelNotFoundException {
+        Optional<Channel> channel = channelRepository.findById(id);
         if(channel.isEmpty()){
             throw new ChannelNotFoundException();
         }
@@ -38,33 +38,28 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Channel create(@Valid @RequestBody Channel channel){
-        Channel _channel = repository.save(new Channel(channel.getId(),
-                channel.getName(),
-                channel.getDescription(),
-                channel.getCreatedTime(),
-                channel.getVideos()));
-        return _channel;
+        return channelRepository.save(channel);
     }
 
     //PUT http://localhost:8080/api/channel/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Channel updatedChannel, @PathVariable long id){
-        Optional<Channel> channelData = repository.findById(id);
+    public void update(@Valid @RequestBody Channel updatedChannel, @PathVariable String id){
+        Optional<Channel> channelData = channelRepository.findById(id);
         Channel _channel = channelData.get();
         _channel.setName(updatedChannel.getName());
         _channel.setDescription(updatedChannel.getDescription());
         _channel.setCreatedTime(updatedChannel.getCreatedTime());
         _channel.setVideos(updatedChannel.getVideos());
-        repository.save(_channel);
+        channelRepository.save(_channel);
     }
 
     //DELETE http://localhost:8080/api/channel/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id){
-        if(repository.existsById(id)){
-            repository.deleteById(id);
+    public void delete(@PathVariable String id){
+        if(channelRepository.existsById(id)){
+            channelRepository.deleteById(id);
         }
     }
 }

@@ -49,15 +49,14 @@ public class Video {
 
     }
 
-    public Video(String id,String name,String description,String releaseTime, User author,
-                 List<Caption> captions, List<Comment> comments){
+    public Video(String id,String name,String description,String releaseTime){
         setId(id);
         setName(name);
         setDescription(description);
         setReleaseTime(releaseTime);
-        setAuthor(author);
-        setCaptions(captions);
-        setComments(comments);
+        setAuthor(null);
+        setCaptions(new ArrayList<>());
+        setComments(new ArrayList<>());
     }
 
     public String getId() {
