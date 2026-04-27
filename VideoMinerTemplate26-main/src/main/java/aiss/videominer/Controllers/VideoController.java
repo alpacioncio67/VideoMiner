@@ -52,7 +52,7 @@ public class VideoController {
             @ApiResponse(responseCode = "200",description = "Listado de videos",
                     content = {@Content(schema = @Schema(implementation = Video.class),mediaType = "application/json")})
     })
-    @GetMapping("/channels/{channelId}/videos")
+    @GetMapping
     public List<Video> findAll(@RequestParam(defaultValue = "0")int page,
                                @RequestParam(defaultValue = "10")int size,
                                @RequestParam(required = false) String name,
