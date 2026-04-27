@@ -1,7 +1,10 @@
 package aiss.videominer.Controllers;
 
+import aiss.videominer.Repositories.ChannelRepository;
 import aiss.videominer.Repositories.VideoRepository;
+import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
+import aiss.videominer.model.Channel;
 import aiss.videominer.model.User;
 import aiss.videominer.model.Video;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,6 +33,9 @@ public class VideoController {
 
     @Autowired
     VideoRepository videoRepository;
+
+    @Autowired
+    ChannelRepository channelRepository;
 
     @Autowired
     public VideoController(VideoRepository videoRepository){
@@ -113,16 +119,23 @@ public class VideoController {
                     content = {@Content(schema = @Schema())})
     })
     @ResponseStatus(HttpStatus.CREATED) // 201
-    @PostMapping
-    public Video create(@Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video){
-        Video _video = videoRepository.save(new Video(video.getId(),video.getName(),
+    @PostMapping("/channels/{channelId}/videos")
+    public Video create(@PathVariable long channelId ,@Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video)
+    throws ChannelNotFoundException {
+        Optional<Channel> canal = channelRepository.findById(channelId);
+
+        if(canal.isEmpty()){
+            throw new ChannelNotFoundException();
+        }
+
+        canal.get().getVideos().add(video);
+
+        return videoRepository.save(new Video(video.getId(),video.getName(),
                 video.getDescription(),
                 video.getReleaseTime(),
                 video.getAuthor(),
                 video.getCaptions(),
                 video.getComments()));
-
-        return _video;
     }
 
     //PUT http://localhost:8080/api/users/{id}
