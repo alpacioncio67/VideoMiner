@@ -11,8 +11,8 @@ import jakarta.persistence.*;
 public class    Caption {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @JsonProperty("id")
+    private String id;
 
     @JsonProperty("name")
     @Column(name = "name")
@@ -26,16 +26,17 @@ public class    Caption {
 
     }
 
-    public Caption(String name, String language){
+    public Caption(String id,String name, String language){
+        this.id=id;
         this.name=name;
         this.language=language;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -117,7 +117,10 @@ public class VideoController {
     public Video create(@Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video){
         Video _video = videoRepository.save(new Video(video.getName(),
                 video.getDescription(),
-                video.getReleaseTime()));
+                video.getReleaseTime(),
+                video.getAuthor(),
+                video.getCaptions(),
+                video.getComments()));
 
         return _video;
     }

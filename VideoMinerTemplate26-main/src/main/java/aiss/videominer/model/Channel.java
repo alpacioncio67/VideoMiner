@@ -17,7 +17,7 @@ public class Channel {
 
     @Id
     @JsonProperty("id")
-    private long id;
+    private String id;
 
     @JsonProperty("name")
     @NotEmpty(message = "Channel name cannot be empty")
@@ -40,18 +40,16 @@ public class Channel {
     public Channel() {
     }
 
-    public Channel(String name, String description, String createdTime){
-        this.name=name;
-        this.description=description;
-        this.createdTime=createdTime;
-        this.videos=new ArrayList<>();
+    public Channel(String id,String name, String description, String createdTime, List<Video> videos){
+        this.id=id;
+        this.videos=videos;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

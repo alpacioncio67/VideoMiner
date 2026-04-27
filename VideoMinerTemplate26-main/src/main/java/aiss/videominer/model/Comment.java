@@ -13,7 +13,7 @@ public class Comment {
 
     @Id
     @JsonProperty("id")
-    private long id;
+    private String id;
 
     @JsonProperty("text")
     @Column(columnDefinition="TEXT")
@@ -26,16 +26,17 @@ public class Comment {
 
     }
 
-    public Comment(String text, String createdOn){
+    public Comment(String id,String text, String createdOn){
+        this.id=id;
         this.text=text;
         this.createdOn=createdOn;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
