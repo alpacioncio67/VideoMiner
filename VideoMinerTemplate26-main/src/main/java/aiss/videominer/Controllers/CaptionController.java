@@ -60,7 +60,7 @@ public class CaptionController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Caption create(@Valid @RequestBody Caption caption){
-        Caption _caption = repository.save(new Caption(caption.getName(),caption.getLanguage()));
+        Caption _caption = repository.save(new Caption(caption.getId(), caption.getName(),caption.getLanguage()));
         return _caption;
     }
 

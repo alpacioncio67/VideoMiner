@@ -115,7 +115,7 @@ public class VideoController {
     @ResponseStatus(HttpStatus.CREATED) // 201
     @PostMapping
     public Video create(@Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video){
-        Video _video = videoRepository.save(new Video(video.getName(),
+        Video _video = videoRepository.save(new Video(video.getId(),video.getName(),
                 video.getDescription(),
                 video.getReleaseTime(),
                 video.getAuthor(),
