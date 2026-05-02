@@ -2,7 +2,7 @@ package aiss.videominer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author Juan C. Alonso
@@ -13,7 +13,7 @@ public class Comment {
 
     @Id
     @JsonProperty("id")
-    private String id;
+    private long id;
 
     @JsonProperty("text")
     @Column(columnDefinition="TEXT")
@@ -22,21 +22,11 @@ public class Comment {
     @JsonProperty("createdOn")
     private String createdOn;
 
-    public Comment(){
-
-    }
-
-    public Comment(String id,String text, String createdOn){
-        this.id=id;
-        this.text=text;
-        this.createdOn=createdOn;
-    }
-
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

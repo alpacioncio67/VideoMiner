@@ -12,10 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +20,7 @@ import java.util.Optional;
 
 @Tag(name= "User",description = "User management API")
 @RestController
-@RequestMapping("/videominer/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -35,54 +31,27 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    // Funciones auxiliares para filtrado
-
-
-
     // Operaciones
     //GET http://localhost:8080/api/users
     @Operation(
             summary = "Retrieve all users",
-            description = "List all users"
+            description = "List all users",
+            tags = {"users","get"}
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de usuarios",
             content = {@Content(schema = @Schema(implementation = User.class),mediaType = "application/json")})
     })
     @GetMapping
-    public List<User> findAll(@RequestParam(defaultValue = "0") int page,
-                              @RequestParam(defaultValue = "10") int size,
-                              @RequestParam(required = false) String name,
-                              @RequestParam(required = false) String order){
-        Pageable paging;
-
-        // Primero tratamos el parámetro order
-
-        if (order!=null){
-            if(order.startsWith("-"))
-                paging = PageRequest.of(page,size, Sort.by(order.substring(1)).descending());
-            else
-                paging = PageRequest.of(page,size,Sort.by(order).ascending());
-        }
-        else
-            paging = PageRequest.of(page,size);
-
-        Page<User> pageUser;
-
-        if (name==null){
-            pageUser = userRepository.findAll(paging);
-        }
-        else
-            // Este método está definido en nuestro repo por nosotros
-            pageUser = userRepository.findByName(name,paging);
-
-        return pageUser.getContent();
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
     //GET http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Retrieve one user",
-            description = "Find one user based on an Id"
+            description = "Find one user based on an Id",
+            tags = {"users","get"}
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200",description = "Listado de un usuario",
@@ -91,7 +60,7 @@ public class UserController {
                     content = {@Content(schema = @Schema())})
     })
     @GetMapping("/{id}")
-        public User findOneById(@Parameter(description = "id del usuario a buscar") @PathVariable String id) throws UserNotFoundException {
+        public User findOneById(@Parameter(description = "id del usuario a buscar") @PathVariable long id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isEmpty()){
@@ -104,7 +73,8 @@ public class UserController {
     //POST http://localhost:8080/api/users
     @Operation(
             summary = "Create a user",
-            description = "Post a user"
+            description = "Post a user",
+            tags = {"users","post"}
     )
     @ApiResponses({
             @ApiResponse(responseCode = "201",description = "Creación de un usuario",
@@ -117,13 +87,14 @@ public class UserController {
     public User create(@Parameter(description = "Cuerpo del usuario a crear") @Valid @RequestBody User user){
         User _user = userRepository.save(new User(user.getName(),user.getUser_link(),
                 user.getPicture_link()));
-        return user;
+        return _user;
     }
 
     //PUT http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Update a user",
-            description = "Update a used based on an Id"
+            description = "Update a used based on an Id",
+            tags = {"users","put"}
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Actualización de un usuario",
@@ -136,7 +107,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @PutMapping("/{id}")
     public void update(@Parameter(description = "Cuerpo del usuario a actualizar") @Valid @RequestBody User updatedUser,
-                       @Parameter(description = "id del usuario a actualizar") @PathVariable String id) throws
+                       @Parameter(description = "id del usuario a actualizar") @PathVariable long id) throws
             UserNotFoundException{
         Optional<User> userData = userRepository.findById(id);
 
@@ -155,7 +126,8 @@ public class UserController {
     //DELETE http://localhost:8080/api/users/{id}
     @Operation(
             summary = "Delete a user",
-            description = "Delete a user based on an Id"
+            description = "Delete a user based on an Id",
+            tags = {"users","delete"}
     )
     @ApiResponses({
             @ApiResponse(responseCode = "204",description = "Borrado de un usuario",
@@ -167,7 +139,7 @@ public class UserController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void delete(@Parameter(description = "id del usuario a borrar") @PathVariable String id){
+    public void delete(@Parameter(description = "id del usuario a borrar") @PathVariable long id){
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
         }

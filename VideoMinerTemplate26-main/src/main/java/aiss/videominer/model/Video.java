@@ -16,8 +16,8 @@ import java.util.List;
 public class Video {
 
     @Id
-    @JsonProperty("id")
-    private String id;
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private long id;
 
     @JsonProperty("name")
     @NotEmpty(message = "Video name cannot be empty")
@@ -49,8 +49,7 @@ public class Video {
 
     }
 
-    public Video(String id,String name,String description,String releaseTime){
-        setId(id);
+    public Video(String name,String description,String releaseTime){
         setName(name);
         setDescription(description);
         setReleaseTime(releaseTime);
@@ -59,11 +58,11 @@ public class Video {
         setComments(new ArrayList<>());
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

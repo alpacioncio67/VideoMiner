@@ -17,7 +17,7 @@ public class Channel {
 
     @Id
     @JsonProperty("id")
-    private String id;
+    private long id;
 
     @JsonProperty("name")
     @NotEmpty(message = "Channel name cannot be empty")
@@ -34,24 +34,18 @@ public class Channel {
     @JsonProperty("videos")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "channelId")
+    @NotNull(message = "Channel videos cannot be null")
     private List<Video> videos;
 
     public Channel() {
+        this.videos = new ArrayList<>();
     }
 
-    public Channel(String id,String name, String description, String createdTime){
-        this.id=id;
-        this.name=name;
-        this.description=description;
-        this.createdTime=createdTime;
-        this.videos=new ArrayList<>();
-    }
-
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
