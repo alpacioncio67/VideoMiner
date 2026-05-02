@@ -5,7 +5,6 @@ import aiss.videominer.Repositories.VideoRepository;
 import aiss.videominer.exception.CaptionNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Caption;
-import aiss.videominer.model.User;
 import aiss.videominer.model.Video;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

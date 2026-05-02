@@ -1,12 +1,10 @@
 package aiss.videominer.Controllers;
 
-import aiss.videominer.Repositories.ChannelRepository;
 import aiss.videominer.Repositories.CommentRepository;
 import aiss.videominer.Repositories.VideoRepository;
 import aiss.videominer.exception.CommentNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Caption;
-import aiss.videominer.model.Channel;
 import aiss.videominer.model.Comment;
 import aiss.videominer.model.Video;
 import io.swagger.v3.oas.annotations.Operation;

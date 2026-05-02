@@ -115,9 +115,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED) // 201
     @PostMapping
     public User create(@Parameter(description = "Cuerpo del usuario a crear") @Valid @RequestBody User user){
-        User _user = userRepository.save(new User(user.getName(),user.getUser_link(),
-                user.getPicture_link()));
-        return user;
+        return userRepository.save(user);
     }
 
     //PUT http://localhost:8080/api/users/{id}

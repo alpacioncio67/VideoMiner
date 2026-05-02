@@ -68,7 +68,7 @@ public class ChannelController {
             pageChannel = channelRepository.findAll(paging);
         }
         else
-            // Este método está definido en nuestro repo por nosotros
+            // Este metodo está definido en nuestro repo por nosotros
             pageChannel = channelRepository.findByName(name,paging);
 
         return pageChannel.getContent();
