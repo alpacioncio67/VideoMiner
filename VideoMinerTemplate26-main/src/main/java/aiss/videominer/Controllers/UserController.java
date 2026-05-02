@@ -46,7 +46,7 @@ public class UserController {
             description = "List all users"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200",description = "Listado de usuarios",
+            @ApiResponse(responseCode = "200",description = "Listado de Usuarios",
             content = {@Content(schema = @Schema(implementation = User.class),mediaType = "application/json")})
     })
     @GetMapping
@@ -85,13 +85,13 @@ public class UserController {
             description = "Find one user based on an Id"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200",description = "Listado de un usuario",
+            @ApiResponse(responseCode = "200",description = "Listado de un Usuario",
                     content = {@Content(schema = @Schema(implementation = User.class),mediaType = "application/json")}),
             @ApiResponse(responseCode = "404",description = "Usuario no encontrado",
                     content = {@Content(schema = @Schema())})
     })
     @GetMapping("/{id}")
-        public User findOneById(@Parameter(description = "id del usuario a buscar") @PathVariable String id) throws UserNotFoundException {
+        public User findOneById(@Parameter(description = "id del Usuario a buscar") @PathVariable String id) throws UserNotFoundException {
         Optional<User> user = userRepository.findById(id);
 
         if(user.isEmpty()){
@@ -126,7 +126,7 @@ public class UserController {
             description = "Update a used based on an Id"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "204",description = "Actualización de un usuario",
+            @ApiResponse(responseCode = "204",description = "Actualización de un Usuario",
                     content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "400",description = "Usuario no actualizado",
                     content = {@Content(schema = @Schema())}),
@@ -135,8 +135,8 @@ public class UserController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @PutMapping("/{id}")
-    public void update(@Parameter(description = "Cuerpo del usuario a actualizar") @Valid @RequestBody User updatedUser,
-                       @Parameter(description = "id del usuario a actualizar") @PathVariable String id) throws
+    public void update(@Parameter(description = "Cuerpo del Usuario a actualizar") @Valid @RequestBody User updatedUser,
+                       @Parameter(description = "id del Usuario a actualizar") @PathVariable String id) throws
             UserNotFoundException{
         Optional<User> userData = userRepository.findById(id);
 
@@ -167,7 +167,7 @@ public class UserController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void delete(@Parameter(description = "id del usuario a borrar") @PathVariable String id){
+    public void delete(@Parameter(description = "id del Usuario a borrar") @PathVariable String id){
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
         }

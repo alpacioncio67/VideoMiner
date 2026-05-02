@@ -48,7 +48,7 @@ public class VideoController {
             description = "List all videos"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200",description = "Listado de videos",
+            @ApiResponse(responseCode = "200",description = "Listado de Videos",
                     content = {@Content(schema = @Schema(implementation = Video.class),mediaType = "application/json")})
     })
     @GetMapping()
@@ -57,8 +57,6 @@ public class VideoController {
                                @RequestParam(required = false) String name,
                                @RequestParam(required = false) String order){
         Pageable paging;
-
-        // Primero tratamos el parámetro order
 
         if (order!=null){
             if(order.startsWith("-"))
@@ -87,13 +85,13 @@ public class VideoController {
             description = "Obtain a video based on an Id"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200",description = "Listado de un videos",
+            @ApiResponse(responseCode = "200",description = "Un Video",
                     content = {@Content(schema = @Schema(implementation = Video.class),mediaType = "application/json")}),
             @ApiResponse(responseCode = "404",description = "Video no encontrado",
                     content = {@Content(schema = @Schema())})
     })
     @GetMapping("/{id}")
-    public Video findOneById(@Parameter(description = "id del video a buscar") @PathVariable String id) throws VideoNotFoundException {
+    public Video findOneById(@Parameter(description = "Id del Video a buscar") @PathVariable String id) throws VideoNotFoundException {
         Optional<Video> video = videoRepository.findById(id);
 
         if (video.isEmpty()){
@@ -116,8 +114,8 @@ public class VideoController {
     })
     @ResponseStatus(HttpStatus.CREATED) // 201
     @PostMapping("/channels/{channelId}/videos")
-    public Video create(@PathVariable String channelId ,
-                        @Parameter(description = "Cuerpo del video a crear") @Valid @RequestBody Video video)
+    public Video create(@Parameter(description = "Id del Canal al que pertenece el Video") @PathVariable String channelId ,
+                        @Parameter(description = "Cuerpo del Video a crear") @Valid @RequestBody Video video)
     throws ChannelNotFoundException {
         Optional<Channel> canal = channelRepository.findById(channelId);
 
@@ -146,8 +144,9 @@ public class VideoController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @PutMapping("/{id}")
-    public void update(@Parameter(description = "Cuerpo del usuario a actualizar") @Valid @RequestBody Video updatedVideo,
-                       @Parameter(description = "id del video a actualizar") @PathVariable String id) throws VideoNotFoundException{
+    public void update(@Parameter(description = "Cuerpo del Video a actualizar") @Valid @RequestBody Video updatedVideo,
+                       @Parameter(description = "id del Video a actualizar") @PathVariable String id)
+            throws VideoNotFoundException{
         Optional<Video> videoData = videoRepository.findById(id);
 
         if (videoData.isEmpty()){
@@ -167,7 +166,7 @@ public class VideoController {
             description = "Delete a video based on an Id"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "204",description = "Borrado de un video",
+            @ApiResponse(responseCode = "204",description = "Borrado de un Video",
                     content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "400",description = "Video no borrado",
                     content = {@Content(schema = @Schema())}),
@@ -176,7 +175,7 @@ public class VideoController {
     })
     @ResponseStatus(HttpStatus.NO_CONTENT) // 204
     @DeleteMapping("/{id}")
-    public void delete(@Parameter(description = "id del video a borrar") @PathVariable String id) {
+    public void delete(@Parameter(description = "id del Video a borrar") @PathVariable String id) {
         if (videoRepository.existsById(id)){
             videoRepository.deleteById(id);
         }
