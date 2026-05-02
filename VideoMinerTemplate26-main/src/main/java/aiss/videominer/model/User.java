@@ -11,9 +11,8 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @JsonProperty("id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @JsonProperty("name")
     private String name;
@@ -34,11 +33,11 @@ public class User {
         setPicture_link(picture_link);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

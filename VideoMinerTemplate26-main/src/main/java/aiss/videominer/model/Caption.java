@@ -1,34 +1,42 @@
 package aiss.videominer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.persistence.*;
 
 /**
  * @author Juan C. Alonso
  */
 @Entity
 @Table(name = "Caption")
-public class Caption {
+public class    Caption {
 
     @Id
     @JsonProperty("id")
-    private long id;
+    private String id;
 
     @JsonProperty("name")
+    @Column(name = "name")
     private String name;
 
     @JsonProperty("language")
+    @Column(name = "language")
     private String language;
 
+    public Caption(){
 
-    public long getId() {
+    }
+
+    public Caption(String id,String name, String language){
+        this.id=id;
+        this.name=name;
+        this.language=language;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

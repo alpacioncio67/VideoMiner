@@ -26,7 +26,7 @@ public class ChannelController {
 
     //GET http://localhost:8080/api/channel/{id}
     @GetMapping("/{id}")
-    public Channel findOne(@PathVariable Long id) throws ChannelNotFoundException {
+    public Channel findOne(@PathVariable String id) throws ChannelNotFoundException {
         Optional<Channel> channel = channelRepository.findById(id);
         if(channel.isEmpty()){
             throw new ChannelNotFoundException();
@@ -44,7 +44,7 @@ public class ChannelController {
     //PUT http://localhost:8080/api/channel/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody Channel updatedChannel, @PathVariable Long id){
+    public void update(@Valid @RequestBody Channel updatedChannel, @PathVariable String id){
         Optional<Channel> channelData = channelRepository.findById(id);
         Channel _channel = channelData.get();
         _channel.setName(updatedChannel.getName());
@@ -57,7 +57,7 @@ public class ChannelController {
     //DELETE http://localhost:8080/api/channel/{id}
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable String id){
         if(channelRepository.existsById(id)){
             channelRepository.deleteById(id);
         }
