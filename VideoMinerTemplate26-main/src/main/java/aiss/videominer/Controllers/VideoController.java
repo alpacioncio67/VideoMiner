@@ -42,7 +42,7 @@ public class VideoController {
     }
 
     // Operaciones
-    //GET http://localhost:8080/api/users
+    //GET http://localhost:8080/videominer/videos
     @Operation(
             summary = "Retrieve all videos",
             description = "List all videos"
@@ -79,7 +79,7 @@ public class VideoController {
         return pageVideo.getContent();
     }
 
-    //GET http://localhost:8080/api/videos/{id}
+    //GET http://localhost:8080/videominer/videos{id}
     @Operation(
             summary = "Retrieve one video",
             description = "Obtain a video based on an Id"
@@ -101,7 +101,7 @@ public class VideoController {
         return video.get();
     }
 
-    //POST http://localhost:8080/api/users
+    //POST http://localhost:8080/videominer/videos
     @Operation(
             summary = "Create a video",
             description = "POST a video"
@@ -129,7 +129,7 @@ public class VideoController {
         return video;
     }
 
-    //PUT http://localhost:8080/api/users/{id}
+    //PUT http://localhost:8080/videominer/videos{id}
     @Operation(
             summary = "Update a video",
             description = "Update a video based on an Id"
@@ -160,7 +160,7 @@ public class VideoController {
         videoRepository.save(_video);
     }
 
-    //DELETE http://localhost:8080/api/users/{id}
+    //DELETE http://localhost:8080/videominer/videos{id}
     @Operation(
             summary = "Delete a video",
             description = "Delete a video based on an Id"
