@@ -10,9 +10,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,7 +58,12 @@ class UserControllerTest {
                 HttpEntity.EMPTY,
                 User[].class);
         User[] usersArray = response.getBody();
-        List<User> users = Arrays.asList(usersArray);
+
+        List<User> users = new ArrayList<>();
+
+        if(usersArray!=null){
+            users = Arrays.asList(usersArray);
+        }
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertFalse(users.isEmpty(), "The list of users is empty");
