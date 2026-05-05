@@ -1,0 +1,111 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< aiss.videominer:videominer >---------------------
+[INFO] Building videominer 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.1:run (default-cli) > test-compile @ videominer >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ videominer ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ videominer ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ videominer ---
+[INFO] skip non existing resourceDirectory C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ videominer ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:3.2.1:run (default-cli) < test-compile @ videominer <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.1:run (default-cli) @ videominer ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.1)
+
+2026-05-05T14:09:59.520+02:00  INFO 1964 --- [           main] aiss.videominer.VideominerApplication    : Starting VideominerApplication using Java 25.0.2 with PID 1964 (C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\target\classes started by berny in C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main)
+2026-05-05T14:09:59.523+02:00  INFO 1964 --- [           main] aiss.videominer.VideominerApplication    : No active profile set, falling back to 1 default profile: "default"
+2026-05-05T14:10:00.131+02:00  INFO 1964 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-05-05T14:10:00.201+02:00  INFO 1964 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 5 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/berny/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.17/tomcat-embed-core-10.1.17.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-05-05T14:10:00.641+02:00  INFO 1964 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-05-05T14:10:00.653+02:00  INFO 1964 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-05-05T14:10:00.653+02:00  INFO 1964 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.17]
+2026-05-05T14:10:00.712+02:00  INFO 1964 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-05-05T14:10:00.713+02:00  INFO 1964 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1151 ms
+2026-05-05T14:10:00.762+02:00  INFO 1964 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-05-05T14:10:00.917+02:00  INFO 1964 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-05-05T14:10:00.921+02:00  INFO 1964 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-05-05T14:10:00.930+02:00  INFO 1964 --- [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-ui'. Database available at 'jdbc:h2:mem:testdb'
+2026-05-05T14:10:01.031+02:00  INFO 1964 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-05-05T14:10:01.074+02:00  INFO 1964 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.1.Final
+2026-05-05T14:10:01.101+02:00  INFO 1964 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-05-05T14:10:01.295+02:00  INFO 1964 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-05-05T14:10:01.332+02:00  WARN 1964 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-05-05T14:10:02.177+02:00  INFO 1964 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: create table caption (id varchar(255) not null, language varchar(255), name varchar(255), video_id varchar(255), primary key (id))
+Hibernate: create table channel (id varchar(255) not null, created_time varchar(255), description TEXT, name varchar(255), primary key (id))
+Hibernate: create table comment (id varchar(255) not null, created_on varchar(255), text TEXT, video_id varchar(255), primary key (id))
+Hibernate: create table video (id varchar(255) not null, description TEXT, name varchar(255), release_time varchar(255), author_id varchar(255), channel_id varchar(255), primary key (id))
+Hibernate: create table vmuser (id varchar(255) not null, name varchar(255), picture_link varchar(255), user_link varchar(255), primary key (id))
+Hibernate: alter table if exists video drop constraint if exists UK_qs2on7abslywv4qny9xaady2s
+Hibernate: alter table if exists video add constraint UK_qs2on7abslywv4qny9xaady2s unique (author_id)
+Hibernate: alter table if exists caption add constraint FKrvt383aj48j5rpmelw7uc5d63 foreign key (video_id) references video
+Hibernate: alter table if exists comment add constraint FKbsuh08kv1lyh8v6ivufrollr6 foreign key (video_id) references video
+Hibernate: alter table if exists video add constraint FKogld83d514rrrjae66graw27y foreign key (author_id) references vmuser
+Hibernate: alter table if exists video add constraint FKfrbu2k83awmspohxv36yi6tgt foreign key (channel_id) references channel
+2026-05-05T14:10:02.258+02:00  INFO 1964 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-05-05T14:10:02.735+02:00  WARN 1964 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by nonapi.io.github.classgraph.utils.FileUtils (file:/C:/Users/berny/.m2/repository/io/github/classgraph/classgraph/4.8.149/classgraph-4.8.149.jar)
+WARNING: Please consider reporting this to the maintainers of class nonapi.io.github.classgraph.utils.FileUtils
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+2026-05-05T14:10:03.487+02:00  WARN 1964 --- [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-05-05T14:10:03.490+02:00  INFO 1964 --- [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-05-05T14:10:03.491+02:00  INFO 1964 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-05-05T14:10:03.494+02:00  INFO 1964 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-05-05T14:10:03.507+02:00  INFO 1964 --- [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-05-05T14:10:03.526+02:00 ERROR 1964 --- [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.789 s
+[INFO] Finished at: 2026-05-05T14:10:03+02:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.1:run (default-cli) on project videominer: Process terminated with exit code: 1 -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

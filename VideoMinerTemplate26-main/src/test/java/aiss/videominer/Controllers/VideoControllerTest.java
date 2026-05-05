@@ -20,7 +20,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class VideoControllerTest {
+class VideoControllerTest extends ApiKeyTestSupport {
 
     @LocalServerPort
     int port;
@@ -47,7 +47,7 @@ class VideoControllerTest {
         ResponseEntity<Channel> response = restTemplate.exchange(
                 channelUri(""),
                 HttpMethod.POST,
-                new HttpEntity<>(channel),
+                authorizedEntity(channel),
                 Channel.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -63,7 +63,7 @@ class VideoControllerTest {
         ResponseEntity<Video> response = restTemplate.exchange(
                 uri("/channels/" + channelId + "/videos"),
                 HttpMethod.POST,
-                new HttpEntity<>(video),
+                authorizedEntity(video),
                 Video.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -130,7 +130,7 @@ class VideoControllerTest {
         ResponseEntity<Void> updateResponse = restTemplate.exchange(
                 uri("/" + video.getId()),
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedVideo),
+                authorizedEntity(updatedVideo),
                 Void.class);
 
         ResponseEntity<Video> getResponse = restTemplate.exchange(
@@ -156,7 +156,7 @@ class VideoControllerTest {
         ResponseEntity<Void> deleteResponse = restTemplate.exchange(
                 uri("/" + video.getId()),
                 HttpMethod.DELETE,
-                HttpEntity.EMPTY,
+                authorizedEntity(),
                 Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, deleteResponse.getStatusCode());

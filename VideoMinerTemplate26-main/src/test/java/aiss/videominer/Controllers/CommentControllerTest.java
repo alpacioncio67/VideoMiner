@@ -22,7 +22,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class CommentControllerTest {
+class CommentControllerTest extends ApiKeyTestSupport {
 
     @LocalServerPort
     int port;
@@ -53,7 +53,7 @@ class CommentControllerTest {
         ResponseEntity<Channel> response = restTemplate.exchange(
                 channelUri(""),
                 HttpMethod.POST,
-                new HttpEntity<>(channel),
+                authorizedEntity(channel),
                 Channel.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -70,7 +70,7 @@ class CommentControllerTest {
         ResponseEntity<Video> response = restTemplate.exchange(
                 videoUri("/channels/" + channelId + "/videos"),
                 HttpMethod.POST,
-                new HttpEntity<>(video),
+                authorizedEntity(video),
                 Video.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -86,7 +86,7 @@ class CommentControllerTest {
         ResponseEntity<Comment> response = restTemplate.exchange(
                 uri("/videos/" + videoId + "/comments"),
                 HttpMethod.POST,
-                new HttpEntity<>(comment),
+                authorizedEntity(comment),
                 Comment.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -162,7 +162,7 @@ class CommentControllerTest {
         ResponseEntity<Void> updateResponse = restTemplate.exchange(
                 uri("/" + comment.getId()),
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedComment),
+                authorizedEntity(updatedComment),
                 Void.class);
 
         ResponseEntity<Comment> getResponse = restTemplate.exchange(
@@ -189,7 +189,7 @@ class CommentControllerTest {
         ResponseEntity<Void> deleteResponse = restTemplate.exchange(
                 uri("/" + comment.getId()),
                 HttpMethod.DELETE,
-                HttpEntity.EMPTY,
+                authorizedEntity(),
                 Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, deleteResponse.getStatusCode());

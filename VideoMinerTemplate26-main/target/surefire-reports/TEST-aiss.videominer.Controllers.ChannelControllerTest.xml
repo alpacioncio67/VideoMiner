@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="aiss.videominer.Controllers.UserControllerTest" time="0.16" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="aiss.videominer.Controllers.ChannelControllerTest" time="0.196" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -68,38 +68,64 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="testUpdateUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.036">
-    <system-out><![CDATA[2026-05-05T14:00:06.275+02:00  INFO 15836 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [aiss.videominer.Controllers.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-05-05T14:00:06.276+02:00  INFO 15836 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration aiss.videominer.VideominerApplication for test class aiss.videominer.Controllers.UserControllerTest
-Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-Hibernate: update vmuser set name=?,picture_link=?,user_link=? where id=?
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-User{id='a38fc15b-5ed9-4afe-ae11-05a55647297c', name='Ana actualizada', user_link='https://example.com/ana-updated', picture_link='https://example.com/ana-updated.jpg'}
+  <testcase name="testDeleteChannel" classname="aiss.videominer.Controllers.ChannelControllerTest" time="0.041">
+    <system-out><![CDATA[2026-05-05T14:00:05.751+02:00  INFO 15836 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [aiss.videominer.Controllers.ChannelControllerTest]: ChannelControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-05-05T14:00:05.754+02:00  INFO 15836 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration aiss.videominer.VideominerApplication for test class aiss.videominer.Controllers.ChannelControllerTest
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select count(*) from channel c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: delete from channel where id=?
 ]]></system-out>
   </testcase>
-  <testcase name="getAllUsers" classname="aiss.videominer.Controllers.UserControllerTest" time="0.04">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 offset ? rows fetch first ? rows only
-[User{id='a38fc15b-5ed9-4afe-ae11-05a55647297c', name='Ana actualizada', user_link='https://example.com/ana-updated', picture_link='https://example.com/ana-updated.jpg'}, User{id='b6861846-cc04-4863-9f10-d8faa7e9b1ee', name='Ana', user_link='https://example.com/Ana', picture_link='https://example.com/Ana.jpg'}]
+  <testcase name="testPostChannel" classname="aiss.videominer.Controllers.ChannelControllerTest" time="0.013">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Channel{id='21f6907d-bf9d-49d0-b838-19d068eb208b', name='Canal nuevo', description='Description Canal nuevo', createdTime='2026-05-04T10:00:00Z', videos=[]}
 ]]></system-out>
   </testcase>
-  <testcase name="getUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.017">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-User{id='9e391102-694e-4e89-b65b-3fe573b447c9', name='Ana', user_link='https://example.com/Ana', picture_link='https://example.com/Ana.jpg'}
+  <testcase name="getAllChannels" classname="aiss.videominer.Controllers.ChannelControllerTest" time="0.046">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 offset ? rows fetch first ? rows only
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from caption c1_0 where c1_0.video_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from caption c1_0 where c1_0.video_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from caption c1_0 where c1_0.video_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from caption c1_0 where c1_0.video_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from caption c1_0 where c1_0.video_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+[Channel{id='8937450f-3e45-47da-899b-a24b973d1832', name='Canal 8937450f-3e45-47da-899b-a24b973d1832', description='Description', createdTime='2026-05-04T10:00:00Z', videos=[Video{id='4945e9a3-3ba0-4c0e-b869-e265babb4c83', name='Video demo', description='Description', releaseTime='2026-05-04T11:00:00Z', author=null, comments=[], captions=[]}]}, Channel{id='b1aec6b9-f3b0-4037-82ba-52e6bd12b22c', name='Canal b1aec6b9-f3b0-4037-82ba-52e6bd12b22c', description='Description', createdTime='2026-05-04T10:00:00Z', videos=[Video{id='cfd83758-6955-4864-a084-eddea22cd1ea', name='Video demo', description='Description', releaseTime='2026-05-04T11:00:00Z', author=null, comments=[], captions=[Caption{id='1c1b024a-a730-481a-b5fb-a25930b211c5', name='Subtitulo demo', language='es'}]}]}, Channel{id='ac146ee1-60db-4687-82be-fad7705ecc3e', name='Canal ac146ee1-60db-4687-82be-fad7705ecc3e', description='Description', createdTime='2026-05-04T10:00:00Z', videos=[Video{id='31d567f2-5e80-4b24-a2de-9339e1c5f853', name='Video demo', description='Description', releaseTime='2026-05-04T11:00:00Z', author=null, comments=[], captions=[Caption{id='50a12b56-3adc-40fd-bbeb-6f332abd3c8c', name='Subtitulo nuevo', language='es'}]}]}, Channel{id='3c095bae-08e8-4537-b546-b626ab0d0d05', name='Canal 3c095bae-08e8-4537-b546-b626ab0d0d05', description='Description', createdTime='2026-05-04T10:00:00Z', videos=[Video{id='129558ba-ee8b-4115-a6e0-4598ef0a1b1c', name='Video demo', description='Description', releaseTime='2026-05-04T11:00:00Z', author=null, comments=[], captions=[Caption{id='32c279f7-9890-4f54-b7e8-1600c19bffe9', name='Subtitulo actualizado', language='en'}]}]}, Channel{id='a76f819a-2cc1-48fe-9918-77683c6a11d0', name='Canal a76f819a-2cc1-48fe-9918-77683c6a11d0', description='Description', createdTime='2026-05-04T10:00:00Z', videos=[Video{id='9b8d3115-7ab5-4dc7-9694-8520486c76c0', name='Video demo', description='Description', releaseTime='2026-05-04T11:00:00Z', author=null, comments=[], captions=[Caption{id='59b61804-3501-434f-8a96-f455029dc602', name='Subtitulo demo', language='es'}]}]}, Channel{id='21f6907d-bf9d-49d0-b838-19d068eb208b', name='Canal nuevo', description='Description Canal nuevo', createdTime='2026-05-04T10:00:00Z', videos=[]}, Channel{id='2719e153-72c8-42cc-b7b1-ffa0d5f676c0', name='Canal demo', description='Description Canal demo', createdTime='2026-05-04T10:00:00Z', videos=[]}]
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.033">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select count(*) from vmuser u1_0 where u1_0.id=?
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-Hibernate: delete from vmuser where id=?
+  <testcase name="testUpdateChannel" classname="aiss.videominer.Controllers.ChannelControllerTest" time="0.042">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: update channel set created_time=?,description=?,name=? where id=?
+Hibernate: update video set channel_id=null where channel_id=?
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Channel{id='3a6733f9-ca91-496a-a05d-e36a7e73a434', name='Canal actualizado', description='Description actualizada', createdTime='2026-05-04T12:00:00Z', videos=[]}
 ]]></system-out>
   </testcase>
-  <testcase name="testPostUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.022">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-User{id='784f9623-fd48-4a7a-a696-0edf691d0620', name='Luis', user_link='https://example.com/Luis', picture_link='https://example.com/Luis.jpg'}
+  <testcase name="getChannel" classname="aiss.videominer.Controllers.ChannelControllerTest" time="0.035">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Channel{id='934a8f7d-57bf-488f-8a4e-bf1fbb22f46f', name='Canal demo', description='Description Canal demo', createdTime='2026-05-04T10:00:00Z', videos=[]}
 ]]></system-out>
   </testcase>
 </testsuite>

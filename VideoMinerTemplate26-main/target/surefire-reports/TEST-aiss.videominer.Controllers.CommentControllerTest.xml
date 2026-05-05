@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="aiss.videominer.Controllers.UserControllerTest" time="0.16" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="aiss.videominer.Controllers.CommentControllerTest" time="0.322" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -68,38 +68,93 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="testUpdateUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.036">
-    <system-out><![CDATA[2026-05-05T14:00:06.275+02:00  INFO 15836 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [aiss.videominer.Controllers.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-05-05T14:00:06.276+02:00  INFO 15836 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration aiss.videominer.VideominerApplication for test class aiss.videominer.Controllers.UserControllerTest
-Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-Hibernate: update vmuser set name=?,picture_link=?,user_link=? where id=?
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-User{id='a38fc15b-5ed9-4afe-ae11-05a55647297c', name='Ana actualizada', user_link='https://example.com/ana-updated', picture_link='https://example.com/ana-updated.jpg'}
+  <testcase name="testDeleteComment" classname="aiss.videominer.Controllers.CommentControllerTest" time="0.074">
+    <system-out><![CDATA[2026-05-05T14:00:05.950+02:00  INFO 15836 --- [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [aiss.videominer.Controllers.CommentControllerTest]: CommentControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-05-05T14:00:05.952+02:00  INFO 15836 --- [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration aiss.videominer.VideominerApplication for test class aiss.videominer.Controllers.CommentControllerTest
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time,c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id left join caption c1_0 on v1_0.id=c1_0.video_id where v1_0.id=?
+Hibernate: insert into video (author_id,description,name,release_time,id) values (?,?,?,?,?)
+Hibernate: update video set channel_id=? where id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: insert into comment (created_on,text,id) values (?,?,?)
+Hibernate: update comment set video_id=? where id=?
+Hibernate: select count(*) from comment c1_0 where c1_0.id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: delete from comment where id=?
 ]]></system-out>
   </testcase>
-  <testcase name="getAllUsers" classname="aiss.videominer.Controllers.UserControllerTest" time="0.04">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 offset ? rows fetch first ? rows only
-[User{id='a38fc15b-5ed9-4afe-ae11-05a55647297c', name='Ana actualizada', user_link='https://example.com/ana-updated', picture_link='https://example.com/ana-updated.jpg'}, User{id='b6861846-cc04-4863-9f10-d8faa7e9b1ee', name='Ana', user_link='https://example.com/Ana', picture_link='https://example.com/Ana.jpg'}]
+  <testcase name="getAllComments" classname="aiss.videominer.Controllers.CommentControllerTest" time="0.056">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time,c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id left join caption c1_0 on v1_0.id=c1_0.video_id where v1_0.id=?
+Hibernate: insert into video (author_id,description,name,release_time,id) values (?,?,?,?,?)
+Hibernate: update video set channel_id=? where id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: insert into comment (created_on,text,id) values (?,?,?)
+Hibernate: update comment set video_id=? where id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 offset ? rows fetch first ? rows only
+[Comment{id='f5d65a12-dfeb-4f81-98db-80996582656a', text='Comentario demo', createdOn='2026-05-04T12:00:00Z'}]
 ]]></system-out>
   </testcase>
-  <testcase name="getUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.017">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-User{id='9e391102-694e-4e89-b65b-3fe573b447c9', name='Ana', user_link='https://example.com/Ana', picture_link='https://example.com/Ana.jpg'}
+  <testcase name="testPostComment" classname="aiss.videominer.Controllers.CommentControllerTest" time="0.053">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time,c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id left join caption c1_0 on v1_0.id=c1_0.video_id where v1_0.id=?
+Hibernate: insert into video (author_id,description,name,release_time,id) values (?,?,?,?,?)
+Hibernate: update video set channel_id=? where id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: insert into comment (created_on,text,id) values (?,?,?)
+Hibernate: update comment set video_id=? where id=?
+Comment{id='406a7fc1-0fd3-4c68-b9fc-82ed444daf11', text='Comentario nuevo', createdOn='2026-05-04T12:00:00Z'}
 ]]></system-out>
   </testcase>
-  <testcase name="testDeleteUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.033">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-Hibernate: select count(*) from vmuser u1_0 where u1_0.id=?
-Hibernate: select u1_0.id,u1_0.name,u1_0.picture_link,u1_0.user_link from vmuser u1_0 where u1_0.id=?
-Hibernate: delete from vmuser where id=?
+  <testcase name="testUpdateComment" classname="aiss.videominer.Controllers.CommentControllerTest" time="0.07">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time,c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id left join caption c1_0 on v1_0.id=c1_0.video_id where v1_0.id=?
+Hibernate: insert into video (author_id,description,name,release_time,id) values (?,?,?,?,?)
+Hibernate: update video set channel_id=? where id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: insert into comment (created_on,text,id) values (?,?,?)
+Hibernate: update comment set video_id=? where id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: update comment set created_on=?,text=? where id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Comment{id='d658998d-6b51-4af7-aca2-bfd6a81d9209', text='Comentario actualizado', createdOn='2026-05-04T13:00:00Z'}
 ]]></system-out>
   </testcase>
-  <testcase name="testPostUser" classname="aiss.videominer.Controllers.UserControllerTest" time="0.022">
-    <system-out><![CDATA[Hibernate: insert into vmuser (name,picture_link,user_link,id) values (?,?,?,?)
-User{id='784f9623-fd48-4a7a-a696-0edf691d0620', name='Luis', user_link='https://example.com/Luis', picture_link='https://example.com/Luis.jpg'}
+  <testcase name="getComment" classname="aiss.videominer.Controllers.CommentControllerTest" time="0.054">
+    <system-out><![CDATA[Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name,v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from channel c1_0 left join video v1_0 on c1_0.id=v1_0.channel_id left join vmuser a1_0 on a1_0.id=v1_0.author_id where c1_0.id=?
+Hibernate: insert into channel (created_time,description,name,id) values (?,?,?,?)
+Hibernate: select c1_0.id,c1_0.created_time,c1_0.description,c1_0.name from channel c1_0 where c1_0.id=?
+Hibernate: select v1_0.channel_id,v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.channel_id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time,c1_0.video_id,c1_0.id,c1_0.language,c1_0.name from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id left join caption c1_0 on v1_0.id=c1_0.video_id where v1_0.id=?
+Hibernate: insert into video (author_id,description,name,release_time,id) values (?,?,?,?,?)
+Hibernate: update video set channel_id=? where id=?
+Hibernate: select v1_0.id,a1_0.id,a1_0.name,a1_0.picture_link,a1_0.user_link,v1_0.description,v1_0.name,v1_0.release_time from video v1_0 left join vmuser a1_0 on a1_0.id=v1_0.author_id where v1_0.id=?
+Hibernate: select c1_0.video_id,c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.video_id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Hibernate: insert into comment (created_on,text,id) values (?,?,?)
+Hibernate: update comment set video_id=? where id=?
+Hibernate: select c1_0.id,c1_0.created_on,c1_0.text from comment c1_0 where c1_0.id=?
+Comment{id='a193d4b5-8675-44e1-bf54-e7a8d658535c', text='Comentario demo', createdOn='2026-05-04T12:00:00Z'}
 ]]></system-out>
   </testcase>
 </testsuite>

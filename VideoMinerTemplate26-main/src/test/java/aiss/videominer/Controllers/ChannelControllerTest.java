@@ -20,7 +20,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ChannelControllerTest {
+class ChannelControllerTest extends ApiKeyTestSupport {
 
     @LocalServerPort
     int port;
@@ -43,7 +43,7 @@ class ChannelControllerTest {
         ResponseEntity<Channel> response = restTemplate.exchange(
                 uri(""),
                 HttpMethod.POST,
-                new HttpEntity<>(channel),
+                authorizedEntity(channel),
                 Channel.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -112,7 +112,7 @@ class ChannelControllerTest {
         ResponseEntity<Void> updateResponse = restTemplate.exchange(
                 uri("/" + channel.getId()),
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedChannel),
+                authorizedEntity(updatedChannel),
                 Void.class);
 
         ResponseEntity<Channel> getResponse = restTemplate.exchange(
@@ -137,7 +137,7 @@ class ChannelControllerTest {
         ResponseEntity<Void> deleteResponse = restTemplate.exchange(
                 uri("/" + channel.getId()),
                 HttpMethod.DELETE,
-                HttpEntity.EMPTY,
+                authorizedEntity(),
                 Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, deleteResponse.getStatusCode());

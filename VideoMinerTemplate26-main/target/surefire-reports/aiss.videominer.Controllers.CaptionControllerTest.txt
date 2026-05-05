@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: aiss.videominer.Controllers.CaptionControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.192 s -- in aiss.videominer.Controllers.CaptionControllerTest

@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class UserControllerTest {
+class UserControllerTest extends ApiKeyTestSupport {
 
     @LocalServerPort
     int port;
@@ -40,7 +40,7 @@ class UserControllerTest {
         ResponseEntity<User> response = restTemplate.exchange(
                 uri(""),
                 HttpMethod.POST,
-                new HttpEntity<>(user),
+                authorizedEntity(user),
                 User.class);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
@@ -108,7 +108,7 @@ class UserControllerTest {
         ResponseEntity<Void> updateResponse = restTemplate.exchange(
                 uri("/" + user.getId()),
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedUser),
+                authorizedEntity(updatedUser),
                 Void.class);
 
         ResponseEntity<User> getResponse = restTemplate.exchange(
@@ -133,7 +133,7 @@ class UserControllerTest {
         ResponseEntity<Void> deleteResponse = restTemplate.exchange(
                 uri("/" + user.getId()),
                 HttpMethod.DELETE,
-                HttpEntity.EMPTY,
+                authorizedEntity(),
                 Void.class);
 
         assertEquals(HttpStatus.NO_CONTENT, deleteResponse.getStatusCode());

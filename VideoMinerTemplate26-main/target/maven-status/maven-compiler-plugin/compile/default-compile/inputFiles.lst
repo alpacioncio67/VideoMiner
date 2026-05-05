@@ -7,6 +7,7 @@ C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-mai
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Controllers\CommentController.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Controllers\VideoController.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\exception\CaptionNotFoundException.java
+C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\filter\ApiKeyFilter.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\model\Video.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Repositories\UserRepository.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\exception\UserNotFoundException.java
@@ -18,5 +19,6 @@ C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-mai
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\exception\ChannelNotFoundException.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Repositories\VideoRepository.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Controllers\CaptionController.java
+C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\config\FilterConfig.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\Repositories\CaptionRepository.java
 C:\Users\berny\Documents\AISS\VideoMinerTemplate26-main\VideoMinerTemplate26-main\src\main\java\aiss\videominer\exception\GlobalExceptionHandler.java

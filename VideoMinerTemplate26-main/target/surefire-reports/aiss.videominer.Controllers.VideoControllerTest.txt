@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: aiss.videominer.Controllers.VideoControllerTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.266 s -- in aiss.videominer.Controllers.VideoControllerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s -- in aiss.videominer.Controllers.VideoControllerTest
